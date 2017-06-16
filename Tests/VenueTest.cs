@@ -24,12 +24,27 @@ namespace BandTracker
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Test_Save_SaveVenueToDatabase()
+    {
+      //Arrange
+      Venue testVenue = new Venue("Rose Quarter", "Portland", 20000);
+      testVenue.Save();
+
+      //Act
+      List<Venue> result = Venue.GetAll();
+      List<Venue> testList = new List<Venue>{testVenue};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
 
     public void Dispose()
     {
       Band.DeleteAll();
       Venue.DeleteAll();
-    
+
     }
 
   }

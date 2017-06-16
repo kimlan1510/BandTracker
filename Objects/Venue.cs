@@ -82,6 +82,36 @@ namespace BandTracker
       return AllVenue;
     }
 
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO venues (name, location, capacity) OUTPUT INSERTED.id VALUES (@name,  @location, @capacity);", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", this.GetName());
+      SqlParameter locationPara = new SqlParameter("@location", this.GetLocation());
+      SqlParameter capacityPara = new SqlParameter("@capacity", this.GetCapacity());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(locationPara);
+      cmd.Parameters.Add(capacityPara);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
 
     public static void DeleteAll()
     {
