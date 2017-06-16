@@ -1,0 +1,15 @@
+<h1>Band Tracker</h1>
+<hr />
+<h2>Edit Venue: @Model.GetName()</h2>
+<form action="/venues/edit/@Model.GetId()" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <input name="venue-id" type="hidden" value="@Model.GetId()">
+  <label for="name">venue name</label>
+  <input id="name" name="name" type="text">
+  <label for="location">venue location</label>
+  <input id="location" name="location" type="text">
+  <label for="capacity">venue capacity</label>
+  <input id="capacity" name="capacity" type="number">
+  <button type="submit">Submit</button>
+</form>
+<h4><a href="/">Return home</a></h4>

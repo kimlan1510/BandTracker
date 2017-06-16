@@ -99,6 +99,35 @@ namespace BandTracker
         model.Add("AllBands", AllBands);
         return View["venue.cshtml", model];
       };
+      Get["venues/edit/{id}"] = parameters => {
+        Venue selectedVenue = Venue.Find(parameters.id);
+        return View["venue_edit.cshtml", selectedVenue];
+      };
+      Patch["/venues/edit/{id}"] = parameters =>{
+        Venue SelectedVenue = Venue.Find(parameters.id);
+        SelectedVenue.Update(Request.Form["name"], Request.Form["location"], int.Parse(Request.Form["capacity"]));
+        return View["success.cshtml"];
+      };
+      Get["venues/delete/{id}"] = parameters => {
+       Venue SelectedVenue = Venue.Find(parameters.id);
+       return View["venue_delete.cshtml", SelectedVenue];
+      };
+      Delete["venues/delete/{id}"] = parameters => {
+        Venue SelectedVenue = Venue.Find(parameters.id);
+        SelectedVenue.Delete();
+        return View["success.cshtml"];
+      };
+
+      Post["/bands/clear"] = _ => {
+        Band.DeleteAll();
+        List<Band> AllBand = Band.GetAll();
+        return View["bands.cshtml", AllBand];
+      };
+      Post["/venues/clear"] = _ => {
+        Venue.DeleteAll();
+        List<Venue> AllVenue = Venue.GetAll();
+        return View["venues.cshtml", AllVenue];
+      };
 
     }
   }

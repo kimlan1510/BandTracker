@@ -4,7 +4,7 @@
 {
   @foreach(var venue in Model)
   {
-    <li><a href="/venues/@venue.GetId()">@venue.GetName()</a></li>
+    <li><a href="/venues/@venue.GetId()">@venue.GetName()</a> | <a href="/venues/edit/@venue.GetId()">edit</a> | <a href="/venues/delete/@venue.GetId()">delete</a></li> 
   }
 }
 else
