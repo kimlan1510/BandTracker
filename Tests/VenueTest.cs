@@ -75,6 +75,29 @@ namespace BandTracker
       Assert.Equal(testList, result);
     }
 
+    [Fact]
+    public void Test_Update_UpdatesVenueInDatabase()
+    {
+      //Arrange
+      Venue testVenue = new Venue("Rose Quarter", "Portland", 20000);
+      testVenue.Save();
+      string newName = "moda";
+      string newLocation = "mars";
+      int newCapacity = 10000;
+      //Act
+      testVenue.Update("moda", "mars", 10000);
+      string result1 = testVenue.GetName();
+      string result2 = testVenue.GetLocation();
+      int result3 = testVenue.GetCapacity();
+
+      //Assert
+      Assert.Equal(newName, result1);
+      Assert.Equal(newLocation, result2);
+      Assert.Equal(newCapacity, result3);
+    }
+
+
+
 
     public void Dispose()
     {

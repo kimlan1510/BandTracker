@@ -199,6 +199,30 @@ namespace BandTracker
       }
     }
 
+    public void Update(string name, string location, int capacity)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @name, location = @location, capacity = @capacity WHERE id = @Id;", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", name);
+      SqlParameter locationPara = new SqlParameter("@location", location);
+      SqlParameter capacityPara = new SqlParameter("@capacity", capacity);
+      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(locationPara);
+      cmd.Parameters.Add(capacityPara);
+      cmd.Parameters.Add(idPara);
+
+      this._name = name;
+      this._location = location;
+      this._capacity = capacity;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
+
 
     public static void DeleteAll()
     {
