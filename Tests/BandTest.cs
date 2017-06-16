@@ -24,6 +24,21 @@ namespace BandTracker
       Assert.Equal(0, result);
     }
 
+    [Fact]
+    public void Test_Save_SaveBandToDatabase()
+    {
+      //Arrange
+      Band testBand = new Band("Reo", "rock");
+      testBand.Save();
+
+      //Act
+      List<Band> result = Band.GetAll();
+      List<Band> testList = new List<Band>{testBand};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
 
 
     public void Dispose()
