@@ -55,6 +55,30 @@ namespace BandTracker
     }
 
     [Fact]
+    public void Test_AddVenue_AddsVenueToBand()
+    {
+      //Arrange
+      Band testBand = new Band("reo", "rock");
+      testBand.Save();
+
+      Venue testVenue1 = new Venue("Rose Quarter", "Portland", 20000);
+      testVenue1.Save();
+
+      Venue testVenue2 = new Venue("Moda", "mars", 10000);
+      testVenue2.Save();
+
+      //Act
+      testBand.AddVenue(testVenue1);
+      testBand.AddVenue(testVenue2);
+
+      List<Venue> result = testBand.GetVenue();
+      List<Venue> testList = new List<Venue>{testVenue1, testVenue2};
+
+      //Assert
+      Assert.Equal(testList, result);
+    }
+
+    [Fact]
     public void Test_Find_FindsBandInDatabase()
     {
       //Arrange

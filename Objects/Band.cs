@@ -228,7 +228,6 @@ namespace BandTracker
       }
     }
 
-
     public static void DeleteAll()
     {
       SqlConnection conn = DB.Connection();
@@ -237,8 +236,5 @@ namespace BandTracker
       cmd.ExecuteNonQuery();
       conn.Close();
     }
-
-
-
   }
 }
