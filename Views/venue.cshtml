@@ -1,0 +1,18 @@
+<h1>Band Tracker</h1>
+<h1>Venue: @Model["venue"].GetName()</h1>
+@if(@Model["bands"].Count != 0)
+{
+  <h2>Bands(s):</h2>
+  @foreach(var band in Model["bands"])
+  {
+    <li><a href="/bands/@band.GetId()">@band.GetName()</a></li>
+  }
+}
+else
+{
+  <p>
+    No bands perform here!
+  </p>
+}
+<p><a href="/venues/@Model["venue"].GetId()/band">Add a band to this venue</a></p>
+<p><a href="/">Return Home</a></p>
