@@ -40,6 +40,21 @@ namespace BandTracker
     }
 
     [Fact]
+    public void Test_Update_UpdatesBandInDatabase()
+    {
+      //Arrange
+      Band testBand = new Band("Reo", "rock");
+      testBand.Save();
+      string newName = "journey";
+      //Act
+      testBand.Update("journey", "rock");
+      string result =testBand.GetName();
+
+      //Assert
+      Assert.Equal(newName, result);
+    }
+
+    [Fact]
     public void Test_Find_FindsBandInDatabase()
     {
       //Arrange

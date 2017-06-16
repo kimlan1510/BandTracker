@@ -190,6 +190,27 @@ namespace BandTracker
       }
     }
 
+    public void Update(string name, string type)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE bands SET name = @name, type = @type WHERE id = @Id;", conn);
+
+      SqlParameter namePara = new SqlParameter("@name", name);
+      SqlParameter typePara = new SqlParameter("@type", type);
+      SqlParameter idPara = new SqlParameter("@Id", this.GetId());
+
+      cmd.Parameters.Add(namePara);
+      cmd.Parameters.Add(typePara);
+      cmd.Parameters.Add(idPara);
+
+      this._name = name;
+      this._type = type;
+      cmd.ExecuteNonQuery();
+      conn.Close();
+    }
+
     // public void Delete()
     // {
     //   SqlConnection conn = DB.Connection();
