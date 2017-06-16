@@ -96,6 +96,28 @@ namespace BandTracker
       Assert.Equal(newCapacity, result3);
     }
 
+    [Fact]
+    public void Delete_DeletesVenueAssociationsFromDatabase_VenueList()
+    {
+     //Arrange
+     Venue testVenue = new Venue("Rose Quarter", "Portland", 20000);
+     testVenue.Save();
+
+     Band testBand = new Band("reo", "rock");
+     testBand.Save();
+
+
+     //Act
+     testVenue.AddBand(testBand);
+     testVenue.Delete();
+
+     List<Venue> resultBandVenue = testBand.GetVenue();
+     List<Venue> testBandVenue = new List<Venue> {};
+
+     //Assert
+     Assert.Equal(testBandVenue, resultBandVenue);
+    }
+
 
 
 
