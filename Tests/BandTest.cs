@@ -90,6 +90,27 @@ namespace BandTracker
       Assert.Equal(testBand, foundBand);
     }
 
+    [Fact]
+   public void Delete_DeletesBandAssociationsFromDatabase_BandList()
+   {
+     //Arrange
+     Band testBand = new Band("reo", "rock");
+     testBand.Save();
+
+     Venue testVenue = new Venue("Moda", "mars", 10000);
+     testVenue.Save();
+
+     //Act
+     testBand.AddVenue(testVenue);
+     testBand.Delete();
+
+     List<Band> resultVenueBand = testVenue.GetBand();
+     List<Band> testVenueBand = new List<Band> {};
+
+     //Assert
+     Assert.Equal(testVenueBand, resultVenueBand);
+   }
+
 
 
     public void Dispose()
