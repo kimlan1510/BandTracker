@@ -3,6 +3,9 @@ using Nancy;
 using Nancy.ViewEngines.Razor;
 using System;
 using System.Text.RegularExpressions;
+using System.Text;
+using System.Globalization;
+
 
 namespace BandTracker
 {
@@ -28,7 +31,10 @@ namespace BandTracker
         return View["venue_form.cshtml"];
       };
       Post["/bands/new"] = _ => {
-        Band newBand = new Band(Request.Form["name"], Request.Form["type"]);
+        string name = Request.Form["name"];
+        name.ToLower();
+        string nameTitleCasename = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(name);
+        Band newBand = new Band(nameTitleCasename, Request.Form["type"]);
         newBand.Save();
         List<Band> AllBands = Band.GetAll();
         return View["bands.cshtml", AllBands];
